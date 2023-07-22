@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:planning_poker/widgets/back_card_widget.dart';
-import 'package:planning_poker/widgets/front_card_widget.dart';
+import 'package:planning_poker/view/widgets/back_card_widget.dart';
+import 'package:planning_poker/view/widgets/front_card_widget.dart';
 
 class CardWidget extends StatefulWidget {
   final double width;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:planning_poker/table_controller.dart';
+import 'package:planning_poker/view_model/table_view_model.dart';
 
 class TableWidget extends StatelessWidget {
-  final TableController controller;
+  final TableViewModel controller;
 
   const TableWidget({
     super.key,
