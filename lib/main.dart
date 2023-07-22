@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:planning_poker/table_controller.dart';
 import 'package:planning_poker/widgets/card_widget.dart';
 import 'package:planning_poker/widgets/table_widget.dart';
 
-void main() {
+void main() async {
+  setUrlStrategy(PathUrlStrategy());
   runApp(const MainApp());
 }
 
