@@ -1,10 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:planning_poker/table_controller.dart';
 import 'package:planning_poker/widgets/card_widget.dart';
 import 'package:planning_poker/widgets/table_widget.dart';
+import 'package:planning_poker/firebase_options.dart';
 
 void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   setUrlStrategy(PathUrlStrategy());
   runApp(const MainApp());
 }
