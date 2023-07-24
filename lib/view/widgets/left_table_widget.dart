@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:planning_poker/core/constants.dart';
 import 'package:planning_poker/view/widgets/card_widget.dart';
 import 'package:planning_poker/view_model/left_table_view_model.dart';
 import 'package:planning_poker/view_model/table_view_model.dart';
@@ -19,8 +20,8 @@ class LeftTableWidget extends StatelessWidget {
       animation: leftTableViewModel,
       builder: (context, _) {
         return SizedBox(
-          height: 200,
-          width: 50,
+          height: kTableHeigth,
+          width: kCardHeight,
           child: FittedBox(
             fit: BoxFit.contain,
             child: Column(
@@ -29,8 +30,8 @@ class LeftTableWidget extends StatelessWidget {
                 (index) => Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CardWidget(
-                    width: 90,
-                    height: 60,
+                    width: kCardHeight,
+                    height: kCardWidth,
                     value: leftTableViewModel.leftTableList[index].value,
                     controller: tableViewModel,
                     rotationX: false,
