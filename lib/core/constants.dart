@@ -5,6 +5,7 @@ const String projectId = String.fromEnvironment('PROJECTID');
 const String authDomain = String.fromEnvironment('AUTHDOMAIN');
 const String storageBucket = String.fromEnvironment('STORAGEBUCKET');
 const String measurementId = String.fromEnvironment('MEASUREMENTID');
+const String databaseURL = String.fromEnvironment('DATABASEURL');
 
 const double kCardHeight = 90;
 const double kCardWidth = 50;

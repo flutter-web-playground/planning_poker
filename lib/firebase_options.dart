@@ -45,6 +45,7 @@ class DefaultFirebaseOptions {
     appId: appId,
     messagingSenderId: messagingSenderId,
     projectId: projectId,
+    databaseURL: databaseURL,
     authDomain: authDomain,
     storageBucket: storageBucket,
     measurementId: measurementId,
