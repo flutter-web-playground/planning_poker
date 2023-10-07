@@ -5,6 +5,7 @@ import 'package:planning_poker/firebase_options.dart';
 import 'package:planning_poker/view/pages/home_page.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
