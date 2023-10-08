@@ -3,12 +3,13 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:planning_poker/view/widgets/back_card_widget.dart';
 import 'package:planning_poker/view/widgets/front_card_widget.dart';
+import 'package:planning_poker/view_model/table_view_model.dart';
 
 class CardWidget extends StatefulWidget {
   final double width;
   final double height;
-  final int value;
-  final ValueNotifier controller;
+  final String value;
+  final TableViewModel tableViewModel;
   final bool rotationX;
 
   const CardWidget({
@@ -16,7 +17,7 @@ class CardWidget extends StatefulWidget {
     required this.width,
     required this.height,
     required this.value,
-    required this.controller,
+    required this.tableViewModel,
     required this.rotationX,
   });
 
@@ -25,20 +26,12 @@ class CardWidget extends StatefulWidget {
 }
 
 class _CardWidgetState extends State<CardWidget> {
-  // late final Animation rotateAnim;
-
-  @override
-  void initState() {
-    // rotateAnim = Tween(begin: pi, end: 0.0).animate(widget.controller.value);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final bool rotationX = widget.rotationX;
 
     return AnimatedBuilder(
-      animation: widget.controller,
+      animation: widget.tableViewModel,
       builder: (BuildContext context, Widget? child) {
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 800),
@@ -62,7 +55,7 @@ class _CardWidgetState extends State<CardWidget> {
           },
           switchInCurve: Curves.easeInBack,
           switchOutCurve: Curves.easeInBack.flipped,
-          child: widget.controller.value
+          child: widget.tableViewModel.showCards
               ? FrontCardWidget(
                   key: const ValueKey(true),
                   width: widget.width,
