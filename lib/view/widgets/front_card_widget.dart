@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class FrontCardWidget extends StatelessWidget {
   final double width;
   final double height;
-  final int value;
+  final String value;
 
   const FrontCardWidget({
     super.key,
@@ -23,7 +23,7 @@ class FrontCardWidget extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          value.toString(),
+          value,
           style: const TextStyle(fontSize: 24),
         ),
       ),
