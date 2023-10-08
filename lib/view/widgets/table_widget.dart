@@ -25,7 +25,7 @@ class TableWidget extends StatelessWidget {
           builder: (BuildContext context, Widget? child) {
             return FilledButton(
               onPressed: controller.flipCard,
-              child: controller.value ? const Text('Esconder cartas') : const Text('Mostrar cartas'),
+              child: controller.showCards ? const Text('Esconder cartas') : const Text('Mostrar cartas'),
             );
           },
         ),
