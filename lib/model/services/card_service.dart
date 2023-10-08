@@ -1,64 +1,59 @@
-import 'dart:math';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:planning_poker/model/card_model.dart';
+import 'package:planning_poker/model/user_model.dart';
 
 class CardService {
-  Stream<CardModel> getTopTable() async* {
-    Random random = Random(100);
-    int count = 0;
+  FirebaseDatabase database = FirebaseDatabase.instance;
 
-    while (count < 10) {
-      count += 1;
-      await Future.delayed(const Duration(seconds: 1));
-
-      yield CardModel(
-        value: random.nextInt(100),
-        id: '',
-      );
-    }
+  Stream<List<UserModel>> getTopTable({required String tableId}) {
+    return database.ref('room/$tableId/top').onValue.map(
+      (e) {
+        List<UserModel> userModelList = [];
+        for (var value in e.snapshot.children) {
+          UserModel userModel = UserModel(id: '', name: value.key.toString(), card: CardModel(value: value.value.toString()));
+          userModelList.add(userModel);
+        }
+        return userModelList;
+      },
+    );
   }
 
-  Stream<CardModel> getBottomTable() async* {
-    Random random = Random(100);
-    int count = 0;
-
-    while (count < 6) {
-      count += 1;
-      await Future.delayed(const Duration(seconds: 1));
-
-      yield CardModel(
-        value: random.nextInt(100),
-        id: '',
-      );
-    }
+  Stream<List<UserModel>> getBottomTable({required String tableId}) {
+    return database.ref('room/$tableId/bottom').onValue.map(
+      (e) {
+        List<UserModel> userModelList = [];
+        for (var value in e.snapshot.children) {
+          UserModel userModel = UserModel(id: '', name: value.key.toString(), card: CardModel(value: value.value.toString()));
+          userModelList.add(userModel);
+        }
+        return userModelList;
+      },
+    );
   }
 
-  Stream<CardModel> getLeftTable() async* {
-    Random random = Random(100);
-    int count = 0;
-
-    while (count < 4) {
-      count += 1;
-      await Future.delayed(const Duration(seconds: 1));
-
-      yield CardModel(
-        value: random.nextInt(100),
-        id: '',
-      );
-    }
+  Stream<List<UserModel>> getLeftTable({required String tableId}) {
+    return database.ref('room/$tableId/left').onValue.map(
+      (e) {
+        List<UserModel> userModelList = [];
+        for (var value in e.snapshot.children) {
+          UserModel userModel = UserModel(id: '', name: value.key.toString(), card: CardModel(value: value.value.toString()));
+          userModelList.add(userModel);
+        }
+        return userModelList;
+      },
+    );
   }
 
-  Stream<CardModel> getRightTable() async* {
-    Random random = Random(100);
-    int count = 0;
-
-    while (count < 3) {
-      count += 1;
-      await Future.delayed(const Duration(seconds: 1));
-
-      yield CardModel(
-        value: random.nextInt(100),
-        id: '',
-      );
-    }
+  Stream<List<UserModel>> getRightTable({required String tableId}) {
+    return database.ref('room/$tableId/right').onValue.map(
+      (e) {
+        List<UserModel> userModelList = [];
+        for (var value in e.snapshot.children) {
+          UserModel userModel = UserModel(id: '', name: value.key.toString(), card: CardModel(value: value.value.toString()));
+          userModelList.add(userModel);
+        }
+        return userModelList;
+      },
+    );
   }
 }
