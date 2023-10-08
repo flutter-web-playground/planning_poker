@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:planning_poker/core/constants.dart';
 import 'package:planning_poker/model/repository/card_repository.dart';
 import 'package:planning_poker/model/table_model.dart';
 import 'package:planning_poker/view/widgets/bottom_table_widget.dart';
-import 'package:planning_poker/view/widgets/front_card_widget.dart';
 import 'package:planning_poker/view/widgets/left_table_widget.dart';
 import 'package:planning_poker/view/widgets/right_table_widget.dart';
+import 'package:planning_poker/view/widgets/select_cards_widgets.dart';
 import 'package:planning_poker/view/widgets/table_widget.dart';
 import 'package:planning_poker/view/widgets/top_table_widget.dart';
 import 'package:planning_poker/view_model/bottom_table_view_model.dart';
@@ -63,6 +62,10 @@ class HomePage extends StatelessWidget {
                 repository: cardRepository,
               ),
             ),
+            const SizedBox(
+              height: 100,
+            ),
+            const SelectCardWidget(),
           ],
         ),
       ),
