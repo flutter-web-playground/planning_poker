@@ -1,9 +1,7 @@
 class CardModel {
-  final int value;
-  final String id;
+  String value;
 
   CardModel({
     required this.value,
-    required this.id,
   });
 }
