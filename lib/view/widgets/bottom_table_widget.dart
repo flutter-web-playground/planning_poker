@@ -27,14 +27,14 @@ class BottomTableWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
-                  bottomTableViewModel.bottomTableList.length,
+                  bottomTableViewModel.tableModel.bottomTableList.length,
                   (index) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CardWidget(
                       width: kCardWidth,
                       height: kCardHeight,
-                      value: bottomTableViewModel.bottomTableList[index].value,
-                      controller: tableViewModel,
+                      value: bottomTableViewModel.tableModel.bottomTableList[index].card.value.toString(),
+                      tableViewModel: tableViewModel,
                       rotationX: true,
                     ),
                   ),

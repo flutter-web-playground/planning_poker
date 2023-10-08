@@ -26,14 +26,14 @@ class RightTableWidget extends StatelessWidget {
             fit: BoxFit.contain,
             child: Column(
               children: List.generate(
-                rightTableViewModel.rightTableList.length,
+                rightTableViewModel.tableModel.rightTableList.length,
                 (index) => Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CardWidget(
                     width: kCardHeight,
                     height: kCardWidth,
-                    value: rightTableViewModel.rightTableList[index].value,
-                    controller: tableViewModel,
+                    value: rightTableViewModel.tableModel.rightTableList[index].card.value.toString(),
+                    tableViewModel: tableViewModel,
                     rotationX: false,
                   ),
                 ),

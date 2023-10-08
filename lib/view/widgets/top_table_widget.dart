@@ -17,31 +17,32 @@ class TopTableWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-        animation: topTableViewModel,
-        builder: (context, _) {
-          return SizedBox(
-            width: kTableWidth,
-            height: kCardHeight,
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  topTableViewModel.topTableList.length,
-                  (index) => Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CardWidget(
-                      width: kCardWidth,
-                      height: kCardHeight,
-                      value: topTableViewModel.topTableList[index].value,
-                      controller: tableViewModel,
-                      rotationX: true,
-                    ),
+      animation: topTableViewModel,
+      builder: (context, _) {
+        return SizedBox(
+          width: kTableWidth,
+          height: kCardHeight,
+          child: FittedBox(
+            fit: BoxFit.contain,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                topTableViewModel.tableModel.topTableList.length,
+                (index) => Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CardWidget(
+                    width: kCardWidth,
+                    height: kCardHeight,
+                    value: topTableViewModel.tableModel.topTableList[index].card.value.toString(),
+                    tableViewModel: tableViewModel,
+                    rotationX: true,
                   ),
                 ),
               ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }
