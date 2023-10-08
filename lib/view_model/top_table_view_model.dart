@@ -1,14 +1,19 @@
 import 'package:flutter/widgets.dart';
-import 'package:planning_poker/model/card_model.dart';
 import 'package:planning_poker/model/repository/card_repository.dart';
+import 'package:planning_poker/model/table_model.dart';
 
 class TopTableViewModel extends ChangeNotifier {
   final CardRepository repository;
-  final List<CardModel> topTableList = [];
+  final TableModel tableModel;
 
-  TopTableViewModel({required this.repository}) {
-    repository.getTopTable().listen((event) {
-      topTableList.add(event);
+  TopTableViewModel({
+    required this.tableModel,
+    required this.repository,
+  }) {
+    repository.getTopTable(tableId: tableModel.id).listen((event) {
+      tableModel.topTableList.removeWhere((element) => true);
+      tableModel.topTableList.addAll(event.toList());
+
       notifyListeners();
     });
   }
