@@ -7,57 +7,17 @@ class SelectCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(16.0),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          FrontCardWidget(
+        children: List.generate(cardList.length, (index) {
+          return FrontCardWidget(
             width: kCardWidth,
             height: kCardHeight,
-            value: '1',
-          ),
-          FrontCardWidget(
-            width: kCardWidth,
-            height: kCardHeight,
-            value: '2',
-          ),
-          FrontCardWidget(
-            width: kCardWidth,
-            height: kCardHeight,
-            value: '3',
-          ),
-          FrontCardWidget(
-            width: kCardWidth,
-            height: kCardHeight,
-            value: '5',
-          ),
-          FrontCardWidget(
-            width: kCardWidth,
-            height: kCardHeight,
-            value: '8',
-          ),
-          FrontCardWidget(
-            width: kCardWidth,
-            height: kCardHeight,
-            value: '13',
-          ),
-          FrontCardWidget(
-            width: kCardWidth,
-            height: kCardHeight,
-            value: '21',
-          ),
-          FrontCardWidget(
-            width: kCardWidth,
-            height: kCardHeight,
-            value: '34',
-          ),
-          FrontCardWidget(
-            width: kCardWidth,
-            height: kCardHeight,
-            value: '?',
-          ),
-        ],
+            value: cardList[index],
+          );
+        }),
       ),
     );
   }
