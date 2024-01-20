@@ -28,40 +28,48 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TopTableWidget(
-              tableViewModel: controller,
-              topTableViewModel: TopTableViewModel(
-                tableModel: controller.value,
-                repository: cardRepository,
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                LeftTableWidget(
-                  tableViewModel: controller,
-                  leftTableViewModel: LeftTableViewModel(
-                    tableModel: controller.value,
-                    repository: cardRepository,
+            FittedBox(
+              fit: BoxFit.fill,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TopTableWidget(
+                    tableViewModel: controller,
+                    topTableViewModel: TopTableViewModel(
+                      tableModel: controller.value,
+                      repository: cardRepository,
+                    ),
                   ),
-                ),
-                TableWidget(
-                  controller: controller,
-                ),
-                RightTableWidget(
-                  tableViewModel: controller,
-                  rightTableViewModel: RightTableViewModel(
-                    tableModel: controller.value,
-                    repository: cardRepository,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LeftTableWidget(
+                        tableViewModel: controller,
+                        leftTableViewModel: LeftTableViewModel(
+                          tableModel: controller.value,
+                          repository: cardRepository,
+                        ),
+                      ),
+                      TableWidget(
+                        controller: controller,
+                      ),
+                      RightTableWidget(
+                        tableViewModel: controller,
+                        rightTableViewModel: RightTableViewModel(
+                          tableModel: controller.value,
+                          repository: cardRepository,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
-            ),
-            BottomTableWidget(
-              tableViewModel: controller,
-              bottomTableViewModel: BottomTableViewModel(
-                tableModel: controller.value,
-                repository: cardRepository,
+                  BottomTableWidget(
+                    tableViewModel: controller,
+                    bottomTableViewModel: BottomTableViewModel(
+                      tableModel: controller.value,
+                      repository: cardRepository,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(
