@@ -14,11 +14,13 @@ import 'package:planning_poker/view_model/table_view_model.dart';
 import 'package:planning_poker/view_model/top_table_view_model.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final String tableId;
+
+  const HomePage({super.key, required this.tableId});
 
   @override
   Widget build(BuildContext context) {
-    final TableViewModel controller = TableViewModel(TableModel(id: '123'));
+    final TableViewModel controller = TableViewModel(TableModel(id: tableId));
     final CardRepository cardRepository = CardRepository();
 
     return Scaffold(
