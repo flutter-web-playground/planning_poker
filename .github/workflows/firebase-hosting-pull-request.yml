@@ -26,13 +26,13 @@ jobs:
           channel:  'stable'
       - run: |
           echo { >> ${{ env.FLUTTER_KEYS_PATH }}
-          echo \"APIKEY\":\"\${{ secrets.APIKEY }}\" >> ${{ env.FLUTTER_KEYS_PATH }}
-          echo \"APPID\":\"\${{ secrets.APPID }}\" >> ${{ env.FLUTTER_KEYS_PATH }}
-          echo \"MESSAGINGSENDERID\":\"\${{ secrets.MESSAGINGSENDERID }}\" >> ${{ env.FLUTTER_KEYS_PATH }}
-          echo \"PROJECTID\":\"\${{ secrets.PROJECTID }}\" >> ${{ env.FLUTTER_KEYS_PATH }}
-          echo \"AUTHDOMAIN\":\"\${{ secrets.AUTHDOMAIN }}\" >> ${{ env.FLUTTER_KEYS_PATH }}
-          echo \"DATABASEURL\":\"\${{ secrets.DATABASEURL }}\" >> ${{ env.FLUTTER_KEYS_PATH }}
-          echo \"STORAGEBUCKET\":\"\${{ secrets.STORAGEBUCKET }}\" >> ${{ env.FLUTTER_KEYS_PATH }}
+          echo \"APIKEY\":\"\${{ secrets.APIKEY }}\", >> ${{ env.FLUTTER_KEYS_PATH }}
+          echo \"APPID\":\"\${{ secrets.APPID }}\", >> ${{ env.FLUTTER_KEYS_PATH }}
+          echo \"MESSAGINGSENDERID\":\"\${{ secrets.MESSAGINGSENDERID }}\", >> ${{ env.FLUTTER_KEYS_PATH }}
+          echo \"PROJECTID\":\"\${{ secrets.PROJECTID }}\", >> ${{ env.FLUTTER_KEYS_PATH }}
+          echo \"AUTHDOMAIN\":\"\${{ secrets.AUTHDOMAIN }}\", >> ${{ env.FLUTTER_KEYS_PATH }}
+          echo \"DATABASEURL\":\"\${{ secrets.DATABASEURL }}\", >> ${{ env.FLUTTER_KEYS_PATH }}
+          echo \"STORAGEBUCKET\":\"\${{ secrets.STORAGEBUCKET }}\", >> ${{ env.FLUTTER_KEYS_PATH }}
           echo \"MEASUREMENTID\":\"\${{ secrets.MEASUREMENTID }}\" >> ${{ env.FLUTTER_KEYS_PATH }}          
           echo } >> ${{ env.FLUTTER_KEYS_PATH }}
           cat ${{ env.FLUTTER_KEYS_PATH }}
