@@ -7,15 +7,18 @@ class SelectCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
+    return FittedBox(
+      fit: BoxFit.fill,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: List.generate(cardList.length, (index) {
-          return FrontCardWidget(
-            width: kCardWidth,
-            height: kCardHeight,
-            value: cardList[index],
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FrontCardWidget(
+              width: kCardWidth,
+              height: kCardHeight,
+              value: cardList[index],
+            ),
           );
         }),
       ),
