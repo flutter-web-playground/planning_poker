@@ -39,6 +39,17 @@ jobs:
       - run: flutter clean
       - run: flutter pub get
       - run: flutter build web --release --dart-define-from-file=${{ env.FLUTTER_KEYS_PATH }} --build-number=${GITHUB_RUN_NUMBER}
+      - run: |
+         cd build/web
+         git init
+         git config --global user.email p.h.ferreirah@gmail.com
+         git config --global user.name phferreira
+         git status
+         git remote add origin https://${{secrets.commit_secret}}@github.com/flutter-web-playground/planning_poker.git
+         git checkout -b gh-pages
+         git add --all
+         git commit -m "Build and Deploy from main"
+         git push origin gh-pages -f
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
