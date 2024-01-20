@@ -23,6 +23,21 @@ class MainApp extends StatelessWidget {
         '/': (context) => const RegisterPage(),
       },
       initialRoute: '/',
+      onGenerateRoute: (settings) {
+        if (settings.name == '/table') {
+          final args = settings.arguments as String;
+
+          return MaterialPageRoute(
+            builder: (context) {
+              return HomePage(
+                tableId: args,
+              );
+            },
+          );
+        }
+        assert(false, 'Need to implement ${settings.name}');
+        return null;
+      },
     );
   }
 }
