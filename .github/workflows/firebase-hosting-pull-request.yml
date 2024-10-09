@@ -36,6 +36,7 @@ jobs:
           echo \"MEASUREMENTID\":\"\${{ secrets.MEASUREMENTID }}\" >> ${{ env.FLUTTER_KEYS_PATH }}          
           echo } >> ${{ env.FLUTTER_KEYS_PATH }}
           cat ${{ env.FLUTTER_KEYS_PATH }}
+      - run: flutter create --platforms web .
       - run: flutter clean
       - run: flutter pub get
       - run: flutter build web --release --dart-define-from-file=${{ env.FLUTTER_KEYS_PATH }} --build-number=${GITHUB_RUN_NUMBER}
