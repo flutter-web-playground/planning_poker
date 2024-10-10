@@ -33,6 +33,7 @@ class RightTableWidget extends StatelessWidget {
                     width: kCardHeight,
                     height: kCardWidth,
                     value: rightTableViewModel.tableModel.rightTableList[index].card.value.toString(),
+                    name: rightTableViewModel.tableModel.rightTableList[index].name,
                     tableViewModel: tableViewModel,
                     rotationX: false,
                   ),

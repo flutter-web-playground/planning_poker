@@ -33,6 +33,7 @@ class LeftTableWidget extends StatelessWidget {
                     width: kCardHeight,
                     height: kCardWidth,
                     value: leftTableViewModel.tableModel.leftTableList[index].card.value.toString(),
+                    name: leftTableViewModel.tableModel.leftTableList[index].name,
                     tableViewModel: tableViewModel,
                     rotationX: false,
                   ),
