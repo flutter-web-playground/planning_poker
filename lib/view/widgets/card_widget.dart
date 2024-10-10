@@ -35,40 +35,45 @@ class _CardWidgetState extends State<CardWidget> {
     return AnimatedBuilder(
       animation: widget.tableViewModel,
       builder: (BuildContext context, Widget? child) {
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 800),
-          transitionBuilder: (child, animation) {
-            final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
-            return AnimatedBuilder(
-              animation: rotateAnim,
-              child: child,
-              builder: (context, widget) {
-                final isUnder = (const ValueKey(FrontCardWidget) != widget!.key);
-                var tilt = ((animation.value - 0.5).abs() - 0.5) * 0.003;
-                tilt *= isUnder ? -1.0 : 1.0;
-                final value = isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
-                return Transform(
-                  transform: rotationX ? (Matrix4.rotationY(value)..setEntry(3, 0, tilt)) : (Matrix4.rotationX(value)..setEntry(3, 0, tilt)),
-                  alignment: Alignment.center,
-                  child: widget,
-                );
-              },
-            );
-          },
-          switchInCurve: Curves.easeInBack,
-          switchOutCurve: Curves.easeInBack.flipped,
-          child: widget.tableViewModel.showCards
-              ? FrontCardWidget(
-                  key: const ValueKey(true),
-                  width: widget.width,
-                  height: widget.height,
-                  value: widget.value,
-                )
-              : BackCardWidget(
-                  key: const ValueKey(false),
-                  width: widget.width,
-                  height: widget.height,
-                ),
+        return Tooltip(
+          message: widget.name,
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 800),
+            transitionBuilder: (child, animation) {
+              final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
+              return AnimatedBuilder(
+                animation: rotateAnim,
+                child: child,
+                builder: (context, widget) {
+                  final isUnder = (const ValueKey(FrontCardWidget) != widget!.key);
+                  var tilt = ((animation.value - 0.5).abs() - 0.5) * 0.003;
+                  tilt *= isUnder ? -1.0 : 1.0;
+                  final value = isUnder ? min(rotateAnim.value, pi / 2) : rotateAnim.value;
+                  return Transform(
+                    transform: rotationX
+                        ? (Matrix4.rotationY(value)..setEntry(3, 0, tilt))
+                        : (Matrix4.rotationX(value)..setEntry(3, 0, tilt)),
+                    alignment: Alignment.center,
+                    child: widget,
+                  );
+                },
+              );
+            },
+            switchInCurve: Curves.easeInBack,
+            switchOutCurve: Curves.easeInBack.flipped,
+            child: widget.tableViewModel.showCards
+                ? FrontCardWidget(
+                    key: const ValueKey(true),
+                    width: widget.width,
+                    height: widget.height,
+                    value: widget.value,
+                  )
+                : BackCardWidget(
+                    key: const ValueKey(false),
+                    width: widget.width,
+                    height: widget.height,
+                  ),
+          ),
         );
       },
     );
