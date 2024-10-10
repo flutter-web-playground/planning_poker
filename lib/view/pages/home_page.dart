@@ -15,8 +15,13 @@ import 'package:planning_poker/view_model/top_table_view_model.dart';
 
 class HomePage extends StatelessWidget {
   final String tableId;
+  final String name;
 
-  const HomePage({super.key, required this.tableId});
+  const HomePage({
+    super.key,
+    required this.tableId,
+    required this.name,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +38,10 @@ class HomePage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Text(
+                    name,
+                    style: const TextStyle(height: 20),
+                  ),
                   TopTableWidget(
                     tableViewModel: controller,
                     topTableViewModel: TopTableViewModel(
