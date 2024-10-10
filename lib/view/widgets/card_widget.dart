@@ -9,6 +9,7 @@ class CardWidget extends StatefulWidget {
   final double width;
   final double height;
   final String value;
+  final String name;
   final TableViewModel tableViewModel;
   final bool rotationX;
 
@@ -17,6 +18,7 @@ class CardWidget extends StatefulWidget {
     required this.width,
     required this.height,
     required this.value,
+    required this.name,
     required this.tableViewModel,
     required this.rotationX,
   });
