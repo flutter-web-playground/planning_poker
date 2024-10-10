@@ -48,8 +48,10 @@ class RegisterPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: FilledButton(
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed('/table', arguments: tableController.text);
+                    Navigator.of(context).pushNamed('/table', arguments: [
+                      tableController.text,
+                      nameController.text,
+                    ]);
                   },
                   child: const Text('Procurar'),
                 ),
