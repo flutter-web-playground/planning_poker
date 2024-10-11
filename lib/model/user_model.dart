@@ -3,6 +3,8 @@ import 'package:planning_poker/model/card_model.dart';
 class UserModel {
   String id;
   String name;
+  String side = '';
+  String tableId = '';
   CardModel card;
 
   UserModel({
