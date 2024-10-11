@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:planning_poker/model/repository/card_repository.dart';
 import 'package:planning_poker/model/table_model.dart';
+import 'package:planning_poker/model/user_model.dart';
 import 'package:planning_poker/view/widgets/bottom_table_widget.dart';
 import 'package:planning_poker/view/widgets/left_table_widget.dart';
 import 'package:planning_poker/view/widgets/right_table_widget.dart';
@@ -13,21 +14,38 @@ import 'package:planning_poker/view_model/right_table_view_model.dart';
 import 'package:planning_poker/view_model/table_view_model.dart';
 import 'package:planning_poker/view_model/top_table_view_model.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final String tableId;
-  final String name;
+  final UserModel currentUser;
 
   const HomePage({
     super.key,
     required this.tableId,
-    required this.name,
+    required this.currentUser,
   });
 
   @override
-  Widget build(BuildContext context) {
-    final TableViewModel controller = TableViewModel(TableModel(id: tableId));
-    final CardRepository cardRepository = CardRepository();
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  late TableViewModel controller;
+  late CardRepository cardRepository;
+
+  @override
+  void initState() {
+    controller = TableViewModel(TableModel(id: widget.tableId));
+    cardRepository = CardRepository();
+
+    cardRepository.addUserOnTable(
+      tableId: widget.tableId,
+      user: widget.currentUser,
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Column(
@@ -39,7 +57,7 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    name,
+                    widget.currentUser.name,
                     style: const TextStyle(height: 20),
                   ),
                   TopTableWidget(
@@ -84,7 +102,10 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 100,
             ),
-            const SelectCardWidget(),
+            SelectCardWidget(
+              user: widget.currentUser,
+              cardRepository: cardRepository,
+            ),
           ],
         ),
       ),
