@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:planning_poker/firebase_options.dart';
 import 'package:planning_poker/model/card_model.dart';
+import 'package:planning_poker/model/repository/card_repository.dart';
 import 'package:planning_poker/model/user_model.dart';
 import 'package:planning_poker/view/pages/home_page.dart';
 import 'package:planning_poker/view/pages/register_page.dart';
@@ -22,6 +23,8 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CardRepository cardRepository = CardRepository();
+
     return MaterialApp(
       routes: {
         '/': (context) => const RegisterPage(),
@@ -44,6 +47,7 @@ class MainApp extends StatelessWidget {
               return HomePage(
                 tableId: table,
                 currentUser: currentUser,
+                cardRepository: cardRepository,
               );
             },
           );

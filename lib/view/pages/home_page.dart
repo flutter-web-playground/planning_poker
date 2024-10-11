@@ -19,11 +19,13 @@ import 'package:flutter/foundation.dart';
 class HomePage extends StatefulWidget {
   final String tableId;
   final UserModel currentUser;
+  final CardRepository cardRepository;
 
   const HomePage({
     super.key,
     required this.tableId,
     required this.currentUser,
+    required this.cardRepository,
   });
 
   @override
@@ -32,21 +34,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late TableViewModel controller;
-  late CardRepository cardRepository;
 
   @override
   void initState() {
     controller = TableViewModel(TableModel(id: widget.tableId));
-    cardRepository = CardRepository();
 
-    cardRepository.addUserOnTable(
-      tableId: widget.tableId,
+    widget.cardRepository.addUserOnTable(
       user: widget.currentUser,
+      tableId: widget.tableId,
     );
 
     if (kIsWeb) {
       html.window.onBeforeUnload.listen((event) async {
-        cardRepository.deleteUserOnTable(user: widget.currentUser);
+        widget.cardRepository.deleteUserOnTable(user: widget.currentUser);
       });
     }
 
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                     tableViewModel: controller,
                     topTableViewModel: TopTableViewModel(
                       tableModel: controller.value,
-                      repository: cardRepository,
+                      repository: widget.cardRepository,
                     ),
                   ),
                   Row(
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                         tableViewModel: controller,
                         leftTableViewModel: LeftTableViewModel(
                           tableModel: controller.value,
-                          repository: cardRepository,
+                          repository: widget.cardRepository,
                         ),
                       ),
                       TableWidget(
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                         tableViewModel: controller,
                         rightTableViewModel: RightTableViewModel(
                           tableModel: controller.value,
-                          repository: cardRepository,
+                          repository: widget.cardRepository,
                         ),
                       ),
                     ],
@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                     tableViewModel: controller,
                     bottomTableViewModel: BottomTableViewModel(
                       tableModel: controller.value,
-                      repository: cardRepository,
+                      repository: widget.cardRepository,
                     ),
                   ),
                 ],
@@ -113,7 +113,8 @@ class _HomePageState extends State<HomePage> {
             ),
             SelectCardWidget(
               user: widget.currentUser,
-              cardRepository: cardRepository,
+              cardRepository: widget.cardRepository,
+              controller: controller,
             ),
           ],
         ),
