@@ -53,15 +53,7 @@ class RegisterPage extends StatelessWidget {
                       nameController.text,
                     ]);
                   },
-                  child: const Text('Procurar'),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: FilledButton(
-                  onPressed: () async {
-                  },
-                  child: const Text('Criar nova mesa'),
+                  child: const Text('Entrar'),
                 ),
               ),
             ],
