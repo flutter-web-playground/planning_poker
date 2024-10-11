@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:planning_poker/firebase_options.dart';
+import 'package:planning_poker/model/card_model.dart';
+import 'package:planning_poker/model/user_model.dart';
 import 'package:planning_poker/view/pages/home_page.dart';
 import 'package:planning_poker/view/pages/register_page.dart';
 
@@ -39,11 +41,17 @@ class MainApp extends StatelessWidget {
           final table = args[0] as String;
           final name = args[1] as String;
 
+          final currentUser = UserModel(
+            id: '${DateTime.now().millisecondsSinceEpoch}',
+            name: name,
+            card: CardModel(value: ''),
+          );
+
           return MaterialPageRoute(
             builder: (context) {
               return HomePage(
                 tableId: table,
-                name: name,
+                currentUser: currentUser,
               );
             },
           );
