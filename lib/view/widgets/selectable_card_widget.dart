@@ -15,7 +15,6 @@ class SelectableCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double selectedValue = selected ? 1.3 : 1.0;
-    debugPrint('$selectedValue');
     return FrontCardWidget(
       width: kCardWidth * selectedValue,
       height: kCardHeight * selectedValue,
