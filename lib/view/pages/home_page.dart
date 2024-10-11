@@ -1,3 +1,4 @@
+import 'package:universal_html/html.dart' as html;
 import 'package:flutter/material.dart';
 import 'package:planning_poker/model/repository/card_repository.dart';
 import 'package:planning_poker/model/table_model.dart';
@@ -13,6 +14,7 @@ import 'package:planning_poker/view_model/left_table_view_model.dart';
 import 'package:planning_poker/view_model/right_table_view_model.dart';
 import 'package:planning_poker/view_model/table_view_model.dart';
 import 'package:planning_poker/view_model/top_table_view_model.dart';
+import 'package:flutter/foundation.dart';
 
 class HomePage extends StatefulWidget {
   final String tableId;
@@ -41,6 +43,13 @@ class _HomePageState extends State<HomePage> {
       tableId: widget.tableId,
       user: widget.currentUser,
     );
+
+    if (kIsWeb) {
+      html.window.onBeforeUnload.listen((event) async {
+        cardRepository.deleteUserOnTable(user: widget.currentUser);
+      });
+    }
+
     super.initState();
   }
 
