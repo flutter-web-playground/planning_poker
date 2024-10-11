@@ -20,4 +20,13 @@ class UserModel {
   factory UserModel.empty() {
     return UserModel(id: '', name: '', card: CardModel(value: ''));
   }
+
+  Map<String, Object> toJson() {
+    return {
+      id: {
+        'name': name,
+        'card': card.value,
+      }
+    };
+  }
 }
