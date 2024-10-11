@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:planning_poker/core/constants.dart';
+import 'package:planning_poker/model/user_model.dart';
 import 'package:planning_poker/view/widgets/selectable_card_widget.dart';
 
+import '../../model/repository/card_repository.dart';
+
 class SelectCardWidget extends StatefulWidget {
-  const SelectCardWidget({super.key});
+  final CardRepository cardRepository;
+  final UserModel user;
+
+  const SelectCardWidget({
+    super.key,
+    required this.cardRepository,
+    required this.user,
+  });
 
   @override
   State<SelectCardWidget> createState() => _SelectCardWidgetState();
@@ -28,6 +38,8 @@ class _SelectCardWidgetState extends State<SelectCardWidget> {
                 onTap: () {
                   setState(() {
                     selected = index == selected ? -1 : index;
+                    widget.user.card.value = cardList[index];
+                    widget.cardRepository.updateUserCard(user: widget.user);
                   });
                 },
                 child: SelectableCardWidget(
