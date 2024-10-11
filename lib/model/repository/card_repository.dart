@@ -19,4 +19,20 @@ class CardRepository {
   Stream<List<UserModel>> getRightTable({required String tableId}) async* {
     yield* _service.getRightTable(tableId: tableId);
   }
+
+  createNewTable({required String tableId, required UserModel user}) {
+    return _service.createNewTable(tableId: tableId, user: user);
+  }
+
+  Future<bool> addUserOnTable({required String tableId, required UserModel user}) async {
+    return await _service.addUserOnTable(tableId: tableId, user: user);
+  }
+
+  bool updateUserCard({required UserModel user}) {
+    return _service.updateUserCard(user: user);
+  }
+
+  bool deleteUserOnTable({required UserModel user}) {
+    return _service.deleteUserOnTable(user: user);
+  }
 }

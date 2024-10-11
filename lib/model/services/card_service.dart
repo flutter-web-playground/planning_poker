@@ -42,5 +42,40 @@ class CardService {
   Stream<List<UserModel>> getRightTable({required String tableId}) {
     return getTable(tableId: tableId, side: 'right');
   }
+
+  createNewTable({required String tableId, required UserModel user}) {
+    database.ref('room').update({
+      tableId: {
+        'top': user.toJson(),
+      }
+    });
+  }
+
+  Future<bool> addUserOnTable({required String tableId, required UserModel user}) async {
+    final lastSide = (await database.ref('room/$tableId/lastSide').get()).value.toString();
+
+    final nextSide = switch (lastSide.toString()) {
+      'bottom' => 'left',
+      'left' => 'top',
+      'top' => 'right',
+      'right' => 'bottom',
+      _ => 'right',
+    };
+
+    database.ref('room/$tableId/lastSide').set(nextSide);
+    database.ref('room/$tableId/$nextSide').update(user.toJson());
+    user.side = nextSide;
+    user.tableId = tableId;
+    return true;
+  }
+
+  bool deleteUserOnTable({required UserModel user}) {
+    database.ref('room/${user.tableId}/${user.side}/${user.id}').remove();
+    return true;
+  }
+
+  bool updateUserCard({required UserModel user}) {
+    database.ref('room/${user.tableId}/${user.side}/${user.id}/card').set(user.card.value);
+    return true;
   }
 }
