@@ -23,9 +23,15 @@ class TableWidget extends StatelessWidget {
         child: AnimatedBuilder(
           animation: controller,
           builder: (BuildContext context, Widget? child) {
-            return FilledButton(
-              onPressed: controller.flipCard,
-              child: controller.showCards ? const Text('Esconder cartas') : const Text('Mostrar cartas'),
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FilledButton(
+                  onPressed: controller.flipCard,
+                  child: controller.showCards ? const Text('Esconder cartas') : const Text('Mostrar cartas'),
+                ),
+                if (controller.showCards) Text('Média: ${controller.average()}'),
+              ],
             );
           },
         ),
