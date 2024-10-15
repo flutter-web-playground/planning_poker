@@ -69,7 +69,23 @@ class _HomePageState extends State<HomePage> {
         toolbarHeight: 112,
         title: Column(
           children: [
-            Text(widget.currentUser.name),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(widget.currentUser.name),
+                IconButton(
+                  onPressed: () {
+                    widget.currentUser.specter = !widget.currentUser.specter;
+                    widget.currentUser.card.value = '';
+                    widget.cardRepository.updateUser(user: widget.currentUser);
+                    setState(() {});
+                  },
+                  icon: widget.currentUser.specter
+                      ? const Icon(Icons.remove_red_eye)
+                      : const Icon(Icons.remove_red_eye_outlined),
+                ),
+              ],
+            ),
             Text(
               widget.currentUser.tableId,
               style: const TextStyle(fontSize: 14),
