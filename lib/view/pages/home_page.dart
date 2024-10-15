@@ -144,11 +144,12 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 100,
             ),
-            SelectCardWidget(
-              user: widget.currentUser,
-              cardRepository: widget.cardRepository,
-              showCardsViewModel: showCardsViewModel,
-            ),
+            if (!widget.currentUser.specter)
+              SelectCardWidget(
+                user: widget.currentUser,
+                cardRepository: widget.cardRepository,
+                showCardsViewModel: showCardsViewModel,
+              ),
           ],
         ),
       ),
