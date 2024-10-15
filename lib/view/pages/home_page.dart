@@ -63,6 +63,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        toolbarHeight: 112,
+        title: Column(
+          children: [
+            Text(widget.currentUser.name),
+            Text(
+              widget.currentUser.tableId,
+              style: const TextStyle(fontSize: 14),
+            ),
+          ],
+        ),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -72,10 +86,6 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    widget.currentUser.name,
-                    style: const TextStyle(height: 20),
-                  ),
                   TopTableWidget(
                     showCardsViewModel: showCardsViewModel,
                     topTableViewModel: TopTableViewModel(
