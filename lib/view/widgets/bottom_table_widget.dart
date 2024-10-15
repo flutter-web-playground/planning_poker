@@ -34,8 +34,7 @@ class BottomTableWidget extends StatelessWidget {
                     child: CardWidget(
                       width: kCardWidth,
                       height: kCardHeight,
-                      value: bottomTableViewModel.tableModel.bottomTableList[index].card.value.toString(),
-                      name: bottomTableViewModel.tableModel.bottomTableList[index].name,
+                      user: bottomTableViewModel.tableModel.bottomTableList[index],
                       rotationX: true,
                       showCardsViewModel: showCardsViewModel,
                     ),

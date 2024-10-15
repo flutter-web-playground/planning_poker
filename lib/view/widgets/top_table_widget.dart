@@ -34,8 +34,7 @@ class TopTableWidget extends StatelessWidget {
                   child: CardWidget(
                     width: kCardWidth,
                     height: kCardHeight,
-                    value: topTableViewModel.tableModel.topTableList[index].card.value.toString(),
-                    name: topTableViewModel.tableModel.topTableList[index].name,
+                    user: topTableViewModel.tableModel.topTableList[index],
                     rotationX: true,
                     showCardsViewModel: showCardsViewModel,
                   ),
