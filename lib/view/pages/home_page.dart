@@ -54,6 +54,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    widget.cardRepository.deleteUserOnTable(user: widget.currentUser);
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
