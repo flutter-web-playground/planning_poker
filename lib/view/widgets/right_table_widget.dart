@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:planning_poker/core/constants.dart';
 import 'package:planning_poker/view/widgets/card_widget.dart';
 import 'package:planning_poker/view_model/right_table_view_model.dart';
-import 'package:planning_poker/view_model/table_view_model.dart';
+
+import '../../view_model/show_cards_view_model.dart';
 
 class RightTableWidget extends StatelessWidget {
-  final TableViewModel tableViewModel;
   final RightTableViewModel rightTableViewModel;
+  final ShowCardsViewModel showCardsViewModel;
 
   const RightTableWidget({
     super.key,
-    required this.tableViewModel,
     required this.rightTableViewModel,
+    required this.showCardsViewModel,
   });
 
   @override
@@ -34,8 +35,8 @@ class RightTableWidget extends StatelessWidget {
                     height: kCardWidth,
                     value: rightTableViewModel.tableModel.rightTableList[index].card.value.toString(),
                     name: rightTableViewModel.tableModel.rightTableList[index].name,
-                    tableViewModel: tableViewModel,
                     rotationX: false,
+                    showCardsViewModel: showCardsViewModel,
                   ),
                 ),
               ),

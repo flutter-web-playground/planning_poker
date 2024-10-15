@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:planning_poker/core/constants.dart';
-import 'package:planning_poker/view_model/table_view_model.dart';
+import 'package:planning_poker/view_model/show_cards_view_model.dart';
 
 class TableWidget extends StatelessWidget {
-  final TableViewModel controller;
+  final ShowCardsViewModel showCardsViewModel;
 
   const TableWidget({
     super.key,
-    required this.controller,
+    required this.showCardsViewModel,
   });
 
   @override
@@ -21,16 +21,18 @@ class TableWidget extends StatelessWidget {
       ),
       child: Center(
         child: AnimatedBuilder(
-          animation: controller,
+          animation: showCardsViewModel,
           builder: (BuildContext context, Widget? child) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FilledButton(
-                  onPressed: controller.flipCard,
-                  child: controller.showCards ? const Text('Esconder cartas') : const Text('Mostrar cartas'),
+                  onPressed: showCardsViewModel.flipCards,
+                  child: showCardsViewModel.tableModel.showCards
+                      ? const Text('Esconder cartas')
+                      : const Text('Mostrar cartas'),
                 ),
-                if (controller.showCards) Text('Média: ${controller.average()}'),
+                if (showCardsViewModel.tableModel.showCards) Text('Média: ${showCardsViewModel.tableModel.average()}'),
               ],
             );
           },

@@ -1,7 +1,8 @@
+import 'package:planning_poker/model/table_model.dart';
+import 'package:planning_poker/view_model/show_cards_view_model.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:flutter/material.dart';
 import 'package:planning_poker/model/repository/card_repository.dart';
-import 'package:planning_poker/model/table_model.dart';
 import 'package:planning_poker/model/user_model.dart';
 import 'package:planning_poker/view/widgets/bottom_table_widget.dart';
 import 'package:planning_poker/view/widgets/left_table_widget.dart';
@@ -12,7 +13,6 @@ import 'package:planning_poker/view/widgets/top_table_widget.dart';
 import 'package:planning_poker/view_model/bottom_table_view_model.dart';
 import 'package:planning_poker/view_model/left_table_view_model.dart';
 import 'package:planning_poker/view_model/right_table_view_model.dart';
-import 'package:planning_poker/view_model/table_view_model.dart';
 import 'package:planning_poker/view_model/top_table_view_model.dart';
 import 'package:flutter/foundation.dart';
 
@@ -33,11 +33,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late TableViewModel controller;
+  late ShowCardsViewModel showCardsViewModel;
 
   @override
   void initState() {
-    controller = TableViewModel(TableModel(id: widget.tableId));
+    showCardsViewModel = ShowCardsViewModel(
+      tableModel: TableModel(id: widget.tableId),
+      repository: widget.cardRepository,
+    );
 
     widget.cardRepository.addUserOnTable(
       user: widget.currentUser,
@@ -70,9 +73,9 @@ class _HomePageState extends State<HomePage> {
                     style: const TextStyle(height: 20),
                   ),
                   TopTableWidget(
-                    tableViewModel: controller,
+                    showCardsViewModel: showCardsViewModel,
                     topTableViewModel: TopTableViewModel(
-                      tableModel: controller.value,
+                      tableModel: showCardsViewModel.tableModel,
                       repository: widget.cardRepository,
                     ),
                   ),
@@ -80,28 +83,28 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       LeftTableWidget(
-                        tableViewModel: controller,
+                        showCardsViewModel: showCardsViewModel,
                         leftTableViewModel: LeftTableViewModel(
-                          tableModel: controller.value,
+                          tableModel: showCardsViewModel.tableModel,
                           repository: widget.cardRepository,
                         ),
                       ),
                       TableWidget(
-                        controller: controller,
+                        showCardsViewModel: showCardsViewModel,
                       ),
                       RightTableWidget(
-                        tableViewModel: controller,
+                        showCardsViewModel: showCardsViewModel,
                         rightTableViewModel: RightTableViewModel(
-                          tableModel: controller.value,
+                          tableModel: showCardsViewModel.tableModel,
                           repository: widget.cardRepository,
                         ),
                       ),
                     ],
                   ),
                   BottomTableWidget(
-                    tableViewModel: controller,
+                    showCardsViewModel: showCardsViewModel,
                     bottomTableViewModel: BottomTableViewModel(
-                      tableModel: controller.value,
+                      tableModel: showCardsViewModel.tableModel,
                       repository: widget.cardRepository,
                     ),
                   ),
@@ -114,7 +117,7 @@ class _HomePageState extends State<HomePage> {
             SelectCardWidget(
               user: widget.currentUser,
               cardRepository: widget.cardRepository,
-              controller: controller,
+              showCardsViewModel: showCardsViewModel,
             ),
           ],
         ),
