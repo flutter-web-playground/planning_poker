@@ -1,4 +1,5 @@
 import 'package:planning_poker/model/services/card_service.dart';
+import 'package:planning_poker/model/table_model.dart';
 import 'package:planning_poker/model/user_model.dart';
 
 class CardRepository {
@@ -20,8 +21,12 @@ class CardRepository {
     yield* _service.getRightTable(tableId: tableId);
   }
 
-  createNewTable({required String tableId, required UserModel user}) {
-    return _service.createNewTable(tableId: tableId, user: user);
+  Stream<bool> getShowCards({required String tableId}) async* {
+    yield* _service.getShowCards(tableId: tableId);
+  }
+
+  void flipCards({required TableModel table}) {
+    _service.flipCards(table: table);
   }
 
   Future<bool> addUserOnTable({required String tableId, required UserModel user}) async {

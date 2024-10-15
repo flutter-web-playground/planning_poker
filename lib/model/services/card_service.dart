@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:planning_poker/model/card_model.dart';
+import 'package:planning_poker/model/table_model.dart';
 import 'package:planning_poker/model/user_model.dart';
 
 class CardService {
@@ -43,12 +44,15 @@ class CardService {
     return getTable(tableId: tableId, side: 'right');
   }
 
-  createNewTable({required String tableId, required UserModel user}) {
-    database.ref('room').update({
-      tableId: {
-        'top': user.toJson(),
-      }
+  Stream<bool> getShowCards({required String tableId}) {
+    return database.ref('room/$tableId/showcards').onValue.map((e) {
+      final result = bool.tryParse(e.snapshot.value.toString()) ?? false;
+      return result;
     });
+  }
+
+  void flipCards({required TableModel table}) {
+    database.ref('room/${table.id}/showcards').set(!table.showCards);
   }
 
   Future<bool> addUserOnTable({required String tableId, required UserModel user}) async {
