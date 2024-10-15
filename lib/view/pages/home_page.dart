@@ -17,13 +17,11 @@ import 'package:planning_poker/view_model/top_table_view_model.dart';
 import 'package:flutter/foundation.dart';
 
 class HomePage extends StatefulWidget {
-  final String tableId;
   final UserModel currentUser;
   final CardRepository cardRepository;
 
   const HomePage({
     super.key,
-    required this.tableId,
     required this.currentUser,
     required this.cardRepository,
   });
@@ -38,13 +36,13 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     showCardsViewModel = ShowCardsViewModel(
-      tableModel: TableModel(id: widget.tableId),
+      tableModel: TableModel(id: widget.currentUser.tableId),
       repository: widget.cardRepository,
     );
 
     widget.cardRepository.addUserOnTable(
       user: widget.currentUser,
-      tableId: widget.tableId,
+      tableId: widget.currentUser.tableId,
     );
 
     if (kIsWeb) {

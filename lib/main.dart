@@ -39,13 +39,12 @@ class MainApp extends StatelessWidget {
       onGenerateRoute: (settings) {
         if (settings.name == '/table') {
           final args = settings.arguments as List;
-          final table = args[0] as String;
+          currentUser.tableId = args[0] as String;
           currentUser.name = args[1] as String;
 
           return MaterialPageRoute(
             builder: (context) {
               return HomePage(
-                tableId: table,
                 currentUser: currentUser,
                 cardRepository: cardRepository,
               );
