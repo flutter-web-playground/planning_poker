@@ -17,6 +17,7 @@ class CardService {
           UserModel userModel = UserModel(
             id: user.key.toString(),
             name: userData['name'].toString(),
+            specter: userData['specter'] as bool,
             card: CardModel(
               value: userData['card'].toString(),
             ),
@@ -81,5 +82,9 @@ class CardService {
   bool updateUserCard({required UserModel user}) {
     database.ref('room/${user.tableId}/${user.side}/${user.id}/card').set(user.card.value);
     return true;
+  }
+
+  void updateUser({required UserModel user}) {
+    database.ref('room/${user.tableId}/${user.side}').update(user.toJson());
   }
 }
