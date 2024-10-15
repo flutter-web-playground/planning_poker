@@ -40,4 +40,8 @@ class CardRepository {
   bool deleteUserOnTable({required UserModel user}) {
     return _service.deleteUserOnTable(user: user);
   }
+
+  void updateUser({required UserModel user}) {
+    _service.updateUser(user: user);
+  }
 }
