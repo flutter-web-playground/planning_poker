@@ -5,12 +5,14 @@ class UserModel {
   String name;
   String side = '';
   String tableId = '';
+  bool specter;
   CardModel card;
 
   UserModel({
     required this.id,
     required this.name,
     required this.card,
+    this.specter = false,
   });
 
   factory UserModel.copyFrom(UserModel copy) {
@@ -25,6 +27,7 @@ class UserModel {
     return {
       id: {
         'name': name,
+        'specter': specter,
         'card': card.value,
       }
     };
