@@ -15,11 +15,17 @@ void main() async {
   );
 
   setUrlStrategy(PathUrlStrategy());
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
+
+  final currentUser = UserModel(
+    id: '${DateTime.now().millisecondsSinceEpoch}',
+    name: '',
+    card: CardModel(value: ''),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +40,7 @@ class MainApp extends StatelessWidget {
         if (settings.name == '/table') {
           final args = settings.arguments as List;
           final table = args[0] as String;
-          final name = args[1] as String;
-
-          final currentUser = UserModel(
-            id: '${DateTime.now().millisecondsSinceEpoch}',
-            name: name,
-            card: CardModel(value: ''),
-          );
+          currentUser.name = args[1] as String;
 
           return MaterialPageRoute(
             builder: (context) {
