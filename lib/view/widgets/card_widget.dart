@@ -72,6 +72,7 @@ class _CardWidgetState extends State<CardWidget> {
                     key: const ValueKey(false),
                     width: widget.width,
                     height: widget.height,
+                    isVoted: widget.value.isNotEmpty,
                   ),
           ),
         );
