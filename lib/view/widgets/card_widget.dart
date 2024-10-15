@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:planning_poker/model/user_model.dart';
 import 'package:planning_poker/view/widgets/back_card_widget.dart';
 import 'package:planning_poker/view/widgets/front_card_widget.dart';
 import 'package:planning_poker/view_model/show_cards_view_model.dart';
@@ -8,8 +9,7 @@ import 'package:planning_poker/view_model/show_cards_view_model.dart';
 class CardWidget extends StatefulWidget {
   final double width;
   final double height;
-  final String value;
-  final String name;
+  final UserModel user;
   final ShowCardsViewModel showCardsViewModel;
   final bool rotationX;
 
@@ -17,8 +17,7 @@ class CardWidget extends StatefulWidget {
     super.key,
     required this.width,
     required this.height,
-    required this.value,
-    required this.name,
+    required this.user,
     required this.rotationX,
     required this.showCardsViewModel,
   });
@@ -36,7 +35,7 @@ class _CardWidgetState extends State<CardWidget> {
       animation: widget.showCardsViewModel,
       builder: (BuildContext context, Widget? child) {
         return Tooltip(
-          message: widget.name,
+          message: widget.user.name,
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 800),
             transitionBuilder: (child, animation) {
@@ -61,18 +60,19 @@ class _CardWidgetState extends State<CardWidget> {
             },
             switchInCurve: Curves.easeInBack,
             switchOutCurve: Curves.easeInBack.flipped,
-            child: widget.showCardsViewModel.tableModel.showCards && widget.value.isNotEmpty
+            child: widget.showCardsViewModel.tableModel.showCards && widget.user.card.value.isNotEmpty
                 ? FrontCardWidget(
                     key: const ValueKey(true),
                     width: widget.width,
                     height: widget.height,
-                    value: widget.value,
+                    value: widget.user.card.value,
                   )
                 : BackCardWidget(
                     key: const ValueKey(false),
                     width: widget.width,
                     height: widget.height,
-                    isVoted: widget.value.isNotEmpty,
+                    isVoted: widget.user.card.value.isNotEmpty,
+                    specter: widget.user.specter,
                   ),
           ),
         );
