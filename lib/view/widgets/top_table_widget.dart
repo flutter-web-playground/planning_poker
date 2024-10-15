@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:planning_poker/core/constants.dart';
 import 'package:planning_poker/view/widgets/card_widget.dart';
-import 'package:planning_poker/view_model/table_view_model.dart';
 import 'package:planning_poker/view_model/top_table_view_model.dart';
 
+import '../../view_model/show_cards_view_model.dart';
+
 class TopTableWidget extends StatelessWidget {
-  final TableViewModel tableViewModel;
+  final ShowCardsViewModel showCardsViewModel;
   final TopTableViewModel topTableViewModel;
 
   const TopTableWidget({
     super.key,
-    required this.tableViewModel,
     required this.topTableViewModel,
+    required this.showCardsViewModel,
   });
 
   @override
@@ -35,8 +36,8 @@ class TopTableWidget extends StatelessWidget {
                     height: kCardHeight,
                     value: topTableViewModel.tableModel.topTableList[index].card.value.toString(),
                     name: topTableViewModel.tableModel.topTableList[index].name,
-                    tableViewModel: tableViewModel,
                     rotationX: true,
+                    showCardsViewModel: showCardsViewModel,
                   ),
                 ),
               ),

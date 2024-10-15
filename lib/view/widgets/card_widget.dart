@@ -3,14 +3,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:planning_poker/view/widgets/back_card_widget.dart';
 import 'package:planning_poker/view/widgets/front_card_widget.dart';
-import 'package:planning_poker/view_model/table_view_model.dart';
+import 'package:planning_poker/view_model/show_cards_view_model.dart';
 
 class CardWidget extends StatefulWidget {
   final double width;
   final double height;
   final String value;
   final String name;
-  final TableViewModel tableViewModel;
+  final ShowCardsViewModel showCardsViewModel;
   final bool rotationX;
 
   const CardWidget({
@@ -19,8 +19,8 @@ class CardWidget extends StatefulWidget {
     required this.height,
     required this.value,
     required this.name,
-    required this.tableViewModel,
     required this.rotationX,
+    required this.showCardsViewModel,
   });
 
   @override
@@ -33,7 +33,7 @@ class _CardWidgetState extends State<CardWidget> {
     final bool rotationX = widget.rotationX;
 
     return AnimatedBuilder(
-      animation: widget.tableViewModel,
+      animation: widget.showCardsViewModel,
       builder: (BuildContext context, Widget? child) {
         return Tooltip(
           message: widget.name,
@@ -61,7 +61,7 @@ class _CardWidgetState extends State<CardWidget> {
             },
             switchInCurve: Curves.easeInBack,
             switchOutCurve: Curves.easeInBack.flipped,
-            child: widget.tableViewModel.showCards
+            child: widget.showCardsViewModel.tableModel.showCards && widget.value.isNotEmpty
                 ? FrontCardWidget(
                     key: const ValueKey(true),
                     width: widget.width,
