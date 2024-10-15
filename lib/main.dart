@@ -41,6 +41,7 @@ class MainApp extends StatelessWidget {
           final args = settings.arguments as List;
           currentUser.tableId = args[0] as String;
           currentUser.name = args[1] as String;
+          currentUser.card.value = '';
 
           return MaterialPageRoute(
             builder: (context) {
