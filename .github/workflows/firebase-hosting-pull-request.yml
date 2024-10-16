@@ -39,7 +39,7 @@ jobs:
       - run: flutter create --platforms web .
       - run: flutter clean
       - run: flutter pub get
-      - run: flutter build web --release --dart-define-from-file=${{ env.FLUTTER_KEYS_PATH }} --build-number=${GITHUB_RUN_NUMBER}
+      - run: flutter build web --release --base-href='/planning_poker/' --dart-define-from-file=${{ env.FLUTTER_KEYS_PATH }} --build-number=${GITHUB_RUN_NUMBER}
       - run: |
          cd build/web
          git init
