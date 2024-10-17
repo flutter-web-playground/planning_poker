@@ -27,6 +27,7 @@ Este aplicativo simula a técnica de Planning Poker, onde membros da equipe atri
 Você pode acessar a versão web deste projeto nos seguintes links:
 
 [Planning Poker - Github Pages](https://flutter-web-playground.github.io/planning_poker/)
+
 [Planning Poker - Firebase Hosting](https://planning-poker-6aaa3.web.app/)
 
 ## Como Executar o Projeto Localmente
