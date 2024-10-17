@@ -22,6 +22,13 @@ Este aplicativo simula a técnica de Planning Poker, onde membros da equipe atri
 - **Firebase:** Utilizado para autenticação e armazenamento de dados em tempo real (Firestore).
 - **WebSocket:** Implementado para atualizações em tempo real durante o processo de estimativa.
 
+## Acesse o Projeto
+
+Você pode acessar a versão web deste projeto nos seguintes links:
+
+[Planning Poker - Github Pages](https://flutter-web-playground.github.io/planning_poker/)
+[Planning Poker - Firebase Hosting](https://planning-poker-6aaa3.web.app/)
+
 ## Como Executar o Projeto Localmente
 
 ### Requisitos
