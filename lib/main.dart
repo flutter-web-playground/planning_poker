@@ -8,12 +8,18 @@ import 'package:planning_poker/model/repository/card_repository.dart';
 import 'package:planning_poker/model/user_model.dart';
 import 'package:planning_poker/view/pages/home_page.dart';
 import 'package:planning_poker/view/pages/register_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+late final SharedPreferences sharedPreferences;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  sharedPreferences = await SharedPreferences.getInstance();
 
   setUrlStrategy(PathUrlStrategy());
   runApp(MainApp());
@@ -24,7 +30,7 @@ class MainApp extends StatelessWidget {
 
   final currentUser = UserModel(
     id: '${DateTime.now().millisecondsSinceEpoch}',
-    name: '',
+    name: sharedPreferences.getString('userName') ?? '',
     card: CardModel(value: ''),
   );
 
@@ -51,8 +57,7 @@ class MainApp extends StatelessWidget {
                   currentUser.tableId = state.pathParameters['id'] ?? '';
 
                   if (state.extra != null) {
-                    Map<String, dynamic> extra =
-                        state.extra as Map<String, dynamic>;
+                    Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
 
                     if (extra['userName'].isEmpty) {
                       return RegisterPage(tableId: currentUser.tableId);

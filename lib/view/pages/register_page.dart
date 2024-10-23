@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:planning_poker/main.dart';
 
 class RegisterPage extends StatelessWidget {
   final String tableId;
@@ -12,7 +13,7 @@ class RegisterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tableController = TextEditingController(text: tableId);
-    final nameController = TextEditingController(text: '');
+    final nameController = TextEditingController(text: sharedPreferences.getString('userName'));
 
     return Scaffold(
       body: Center(
@@ -57,6 +58,7 @@ class RegisterPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: FilledButton(
                   onPressed: () {
+                    sharedPreferences.setString('userName', nameController.text);
                     context.goNamed(
                       'table',
                       pathParameters: {
