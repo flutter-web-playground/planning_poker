@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({super.key});
+  final String tableId;
+
+  const RegisterPage({
+    super.key,
+    required this.tableId,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final tableController = TextEditingController(text: '');
+    final tableController = TextEditingController(text: tableId);
     final nameController = TextEditingController(text: '');
 
     return Scaffold(
@@ -48,10 +54,15 @@ class RegisterPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: FilledButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed('/table', arguments: [
-                      tableController.text,
-                      nameController.text,
-                    ]);
+                    context.goNamed(
+                      'table',
+                      pathParameters: {
+                        'id': tableController.text,
+                      },
+                      extra: {
+                        'userName': nameController.text,
+                      },
+                    );
                   },
                   child: const Text('Entrar'),
                 ),
