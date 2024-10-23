@@ -7,8 +7,8 @@ const String storageBucket = String.fromEnvironment('STORAGEBUCKET');
 const String measurementId = String.fromEnvironment('MEASUREMENTID');
 const String databaseURL = String.fromEnvironment('DATABASEURL');
 
-const double kCardHeight = 90;
-const double kCardWidth = 50;
+const double kCardHeight = 130;
+const double kCardWidth = 90;
 const double kTableWidth = 400;
 const double kTableHeigth = 200;
 
