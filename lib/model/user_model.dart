@@ -13,6 +13,7 @@ class UserModel {
     required this.name,
     required this.card,
     this.specter = false,
+    this.tableId = '',
   });
 
   factory UserModel.copyFrom(UserModel copy) {
