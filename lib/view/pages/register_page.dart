@@ -35,17 +35,20 @@ class RegisterPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: 250,
-                  child: TextFormField(
-                    controller: tableController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
+              Visibility(
+                visible: tableId.isEmpty,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: 250,
+                    child: TextFormField(
+                      controller: tableController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        labelText: 'Informe o código da mesa.',
                       ),
-                      labelText: 'Informe o código da mesa.',
                     ),
                   ),
                 ),
