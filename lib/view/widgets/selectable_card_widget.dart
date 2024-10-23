@@ -19,6 +19,7 @@ class SelectableCardWidget extends StatelessWidget {
       width: kCardWidth * selectedValue,
       height: kCardHeight * selectedValue,
       value: card,
+      name: '',
     );
   }
 }

@@ -5,6 +5,7 @@ class BackCardWidget extends StatelessWidget {
   final double height;
   final bool isVoted;
   final bool specter;
+  final String name;
 
   const BackCardWidget({
     super.key,
@@ -12,6 +13,7 @@ class BackCardWidget extends StatelessWidget {
     required this.height,
     required this.isVoted,
     this.specter = false,
+    required this.name,
   });
 
   @override
@@ -23,11 +25,22 @@ class BackCardWidget extends StatelessWidget {
         color: Colors.blue[800],
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
-      child: specter
-          ? const Icon(Icons.remove_red_eye_outlined)
-          : isVoted
-              ? const Icon(Icons.check)
-              : null,
+      child: Column(
+        children: <Widget>[
+          Expanded(
+            flex: 2,
+            child: specter
+                ? const Icon(Icons.remove_red_eye_outlined)
+                : isVoted
+                    ? const Icon(Icons.check)
+                    : const SizedBox(),
+          ),
+          Expanded(
+            flex: 1,
+            child: Text(name),
+          ),
+        ],
+      ),
     );
   }
 }

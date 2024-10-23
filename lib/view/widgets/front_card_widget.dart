@@ -4,12 +4,14 @@ class FrontCardWidget extends StatelessWidget {
   final double width;
   final double height;
   final String value;
+  final String name;
 
   const FrontCardWidget({
     super.key,
     required this.width,
     required this.height,
     required this.value,
+    required this.name,
   });
 
   @override
@@ -22,9 +24,30 @@ class FrontCardWidget extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: Center(
-        child: Text(
-          value,
-          style: const TextStyle(fontSize: 24),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (name.isEmpty)
+              Text(
+                value,
+                style: TextStyle(fontSize: (width / 2)),
+              ),
+            if (name.isNotEmpty)
+              Expanded(
+                flex: 3,
+                child: Center(
+                  child: Text(
+                    value,
+                    style: TextStyle(fontSize: (width / 2)),
+                  ),
+                ),
+              ),
+            if (name.isNotEmpty)
+              Expanded(
+                flex: 1,
+                child: Text(name),
+              ),
+          ],
         ),
       ),
     );

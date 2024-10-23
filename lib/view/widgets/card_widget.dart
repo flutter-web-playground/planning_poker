@@ -66,6 +66,7 @@ class _CardWidgetState extends State<CardWidget> {
                     width: widget.width,
                     height: widget.height,
                     value: widget.user.card.value,
+                    name: widget.user.name,
                   )
                 : BackCardWidget(
                     key: const ValueKey(false),
@@ -73,6 +74,7 @@ class _CardWidgetState extends State<CardWidget> {
                     height: widget.height,
                     isVoted: widget.user.card.value.isNotEmpty,
                     specter: widget.user.specter,
+                    name: widget.user.name,
                   ),
           ),
         );
