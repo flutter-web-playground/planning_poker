@@ -34,7 +34,7 @@ class _SelectCardWidgetState extends State<SelectCardWidget> {
         child: FittedBox(
           fit: BoxFit.fill,
           child: SizedBox(
-            height: kCardHeight * 1.5,
+            height: kCardHeight * 2.0,
             width: kCardHeight * cardList.length,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
