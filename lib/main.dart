@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
-import 'package:go_router/go_router.dart';
 import 'package:planning_poker/firebase_options.dart';
 import 'package:planning_poker/model/card_model.dart';
 import 'package:planning_poker/model/repository/card_repository.dart';
@@ -38,46 +37,41 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: GoRouter(
-        routes: <RouteBase>[
-          GoRoute(
-            path: '/',
-            builder: (BuildContext context, GoRouterState state) {
-              return const RegisterPage(
-                tableId: '',
+    return MaterialApp(
+      routes: {
+        '/': (context) => const RegisterPage(
+              tableId: '',
+            ),
+      },
+      initialRoute: '/',
+      onGenerateRoute: (settings) {
+        final uri = Uri.parse(settings.name!);
+        final queryParameters = uri.queryParametersAll;
+
+        currentUser.tableId = queryParameters['id']?.first ?? '';
+        if (currentUser.name.isEmpty) {
+          return MaterialPageRoute(
+            builder: (context) {
+              return RegisterPage(
+                tableId: currentUser.tableId,
               );
             },
-            routes: <RouteBase>[
-              GoRoute(
-                path: '/table/:id',
-                name: 'table',
-                builder: (BuildContext context, GoRouterState state) {
-                  String userName = '';
-                  currentUser.tableId = state.pathParameters['id'] ?? '';
+          );
+        }
 
-                  if (state.extra != null) {
-                    Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
-
-                    if (extra['userName'].isEmpty) {
-                      return RegisterPage(tableId: currentUser.tableId);
-                    }
-                    userName = extra['userName'];
-                  } else {
-                    return RegisterPage(tableId: currentUser.tableId);
-                  }
-
-                  currentUser.name = userName;
-                  return HomePage(
-                    currentUser: currentUser,
-                    cardRepository: cardRepository,
-                  );
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
+        if (uri.path == '/table') {
+          return MaterialPageRoute(
+            builder: (context) {
+              return HomePage(
+                currentUser: currentUser,
+                cardRepository: cardRepository,
+              );
+            },
+          );
+        }
+        assert(false, 'Need to implement ${settings.name}');
+        return null;
+      },
     );
   }
 }

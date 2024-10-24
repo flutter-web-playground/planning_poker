@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:planning_poker/main.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -59,15 +58,7 @@ class RegisterPage extends StatelessWidget {
                 child: FilledButton(
                   onPressed: () {
                     sharedPreferences.setString('userName', nameController.text);
-                    context.goNamed(
-                      'table',
-                      pathParameters: {
-                        'id': tableController.text,
-                      },
-                      extra: {
-                        'userName': nameController.text,
-                      },
-                    );
+                    Navigator.of(context).pushNamed('/table/${tableController.text}');
                   },
                   child: const Text('Entrar'),
                 ),

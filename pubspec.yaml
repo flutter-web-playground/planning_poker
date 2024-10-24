@@ -14,7 +14,6 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-  go_router: ^14.3.0
   shared_preferences: ^2.3.2
   universal_html: ^2.2.4
 
