@@ -49,26 +49,31 @@ class MainApp extends StatelessWidget {
         final queryParameters = uri.queryParametersAll;
 
         currentUser.tableId = queryParameters['id']?.first ?? '';
-        if (currentUser.name.isEmpty) {
-          return MaterialPageRoute(
-            builder: (context) {
-              return RegisterPage(
-                tableId: currentUser.tableId,
-              );
-            },
-          );
+        currentUser.name = sharedPreferences.getString('userName') ?? '';
+
+        if (uri.path == '/') {
+          if (currentUser.name.isEmpty) {
+            return MaterialPageRoute(
+              builder: (context) {
+                return RegisterPage(
+                  tableId: currentUser.tableId,
+                );
+              },
+            );
+          }
+
+          if (currentUser.tableId.isNotEmpty && currentUser.name.isNotEmpty) {
+            return MaterialPageRoute(
+              builder: (context) {
+                return HomePage(
+                  currentUser: currentUser,
+                  cardRepository: cardRepository,
+                );
+              },
+            );
+          }
         }
 
-        if (uri.path == '/table') {
-          return MaterialPageRoute(
-            builder: (context) {
-              return HomePage(
-                currentUser: currentUser,
-                cardRepository: cardRepository,
-              );
-            },
-          );
-        }
         assert(false, 'Need to implement ${settings.name}');
         return null;
       },

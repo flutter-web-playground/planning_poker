@@ -58,7 +58,7 @@ class RegisterPage extends StatelessWidget {
                 child: FilledButton(
                   onPressed: () {
                     sharedPreferences.setString('userName', nameController.text);
-                    Navigator.of(context).pushNamed('/table/${tableController.text}');
+                    Navigator.of(context).pushNamed('/?id=${tableController.text}');
                   },
                   child: const Text('Entrar'),
                 ),
