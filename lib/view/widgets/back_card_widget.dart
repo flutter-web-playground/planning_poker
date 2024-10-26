@@ -26,18 +26,33 @@ class BackCardWidget extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(
             flex: 2,
-            child: specter
-                ? const Icon(Icons.remove_red_eye_outlined)
-                : isVoted
-                    ? const Icon(Icons.check)
-                    : const SizedBox(),
+            child: Center(
+              child: specter
+                  ? Text(
+                      '🕵️‍♂️',
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontSize: 40,
+                          ),
+                    )
+                  : isVoted
+                      ? Text(
+                          '👍',
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                fontSize: 40,
+                              ),
+                        )
+                      : const SizedBox(),
+            ),
           ),
           Expanded(
             flex: 1,
-            child: Text(name),
+            child: Center(
+              child: Text(name),
+            ),
           ),
         ],
       ),

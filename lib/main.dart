@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:planning_poker/core/custom_theme_data.dart';
 import 'package:planning_poker/firebase_options.dart';
 import 'package:planning_poker/model/card_model.dart';
 import 'package:planning_poker/model/repository/card_repository.dart';
@@ -38,6 +39,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: lightTheme,
       routes: {
         '/': (context) => const RegisterPage(
               tableId: '',

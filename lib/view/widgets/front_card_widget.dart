@@ -28,24 +28,34 @@ class FrontCardWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (name.isEmpty)
-              Text(
-                value,
-                style: TextStyle(fontSize: (width / 2)),
+              Center(
+                child: Text(
+                  value,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontSize: (height / 2),
+                      ),
+                ),
               ),
             if (name.isNotEmpty)
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: Center(
                   child: Text(
                     value,
-                    style: TextStyle(fontSize: (width / 2)),
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: (height / 2),
+                        ),
                   ),
                 ),
               ),
             if (name.isNotEmpty)
               Expanded(
                 flex: 1,
-                child: Text(name),
+                child: Center(
+                  child: Text(
+                    name,
+                  ),
+                ),
               ),
           ],
         ),
