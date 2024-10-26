@@ -29,8 +29,8 @@ class CardRepository {
     _service.flipCards(table: table);
   }
 
-  Future<bool> addUserOnTable({required String tableId, required UserModel user}) async {
-    return await _service.addUserOnTable(tableId: tableId, user: user);
+  Future<void> addUserOnTable({required String tableId, required UserModel user}) async {
+    await _service.addUserOnTable(tableId: tableId, user: user);
   }
 
   bool updateUserCard({required UserModel user}) {

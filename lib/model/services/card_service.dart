@@ -56,22 +56,29 @@ class CardService {
     database.ref('room/${table.id}/showcards').set(!table.showCards);
   }
 
-  Future<bool> addUserOnTable({required String tableId, required UserModel user}) async {
-    final lastSide = (await database.ref('room/$tableId/lastSide').get()).value.toString();
+  Future<({String side, int count})> _getTableSize(String tableId, String side, bool isSide) async {
+    final snapshot = await database.ref('room/$tableId/$side').get();
 
-    final nextSide = switch (lastSide.toString()) {
-      'bottom' => 'left',
-      'left' => 'top',
-      'top' => 'right',
-      'right' => 'bottom',
-      _ => 'right',
-    };
+    final count = snapshot.children.length * (isSide ? 2 : 1);
 
-    database.ref('room/$tableId/lastSide').set(nextSide);
-    database.ref('room/$tableId/$nextSide').update(user.toJson());
-    user.side = nextSide;
+    return (side: side, count: count);
+  }
+
+  Future<void> addUserOnTable({required String tableId, required UserModel user}) async {
+    final sideListCount = <({String side, int count})>[];
+
+    sideListCount.add(await _getTableSize(tableId, 'top', false));
+    sideListCount.add(await _getTableSize(tableId, 'bottom', false));
+    sideListCount.add(await _getTableSize(tableId, 'right', true));
+    sideListCount.add(await _getTableSize(tableId, 'left', true));
+
+    final minor = sideListCount.reduce((curr, next) {
+      return curr.count < next.count ? curr : next;
+    });
+
+    database.ref('room/$tableId/${minor.side}').update(user.toJson());
+    user.side = minor.side;
     user.tableId = tableId;
-    return true;
   }
 
   bool deleteUserOnTable({required UserModel user}) {
