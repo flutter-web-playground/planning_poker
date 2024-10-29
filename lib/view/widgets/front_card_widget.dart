@@ -51,15 +51,15 @@ class FrontCardWidget extends StatelessWidget {
             if (name.isNotEmpty)
               Expanded(
                 flex: 1,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                    child: Text(
-                      name,
-                      overflow: TextOverflow.fade,
-                      maxLines: 1,
-                      softWrap: false,
-                    ),
+                child: Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+                  height: 26,
+                  child: Text(
+                    name,
+                    overflow: name.length > 8 ? TextOverflow.fade : TextOverflow.visible,
+                    maxLines: 1,
+                    softWrap: false,
                   ),
                 ),
               ),

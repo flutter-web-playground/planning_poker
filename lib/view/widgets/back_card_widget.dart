@@ -41,9 +41,10 @@ class BackCardWidget extends StatelessWidget {
                   : isVoted
                       ? Text(
                           '👍',
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                fontSize: 40,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                    fontSize: 40,
+                                  ),
                         )
                       : const SizedBox(),
             ),
