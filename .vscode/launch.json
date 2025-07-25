@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "DEV - Flutter Web (Chrome)",
+      "request" : "launch",
+      "type" : "dart",
+      "program" : "${workspaceFolder}/lib/main.dart",
+      "cwd" : "${workspaceFolder}",
+      "toolArgs": [
+        "-d", "chrome", 
+        "--dart-define-from-file", ".dev.env.json",
+        "--web-port", "8081"
+      ]
+    }
+  ]
+}
+
