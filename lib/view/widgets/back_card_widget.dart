@@ -51,15 +51,16 @@ class BackCardWidget extends StatelessWidget {
           ),
           Expanded(
             flex: 1,
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                child: Text(
-                  name,
-                  overflow: TextOverflow.fade,
-                  maxLines: 1,
-                  softWrap: false,
-                ),
+            child: Container(
+              padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+              alignment: Alignment.center,
+              height: 20,
+              child: Text(
+                name,
+                overflow:
+                    name.length > 8 ? TextOverflow.fade : TextOverflow.visible,
+                maxLines: 1,
+                softWrap: false,
               ),
             ),
           ),
