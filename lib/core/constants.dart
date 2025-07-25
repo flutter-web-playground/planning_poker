@@ -12,4 +12,19 @@ const double kCardWidth = 90;
 const double kTableWidth = 400;
 const double kTableHeigth = 200;
 
-const cardList = <String>['1', '2', '3', '5', '8', '13', '21', '34', '?'];
+// const cardList = <String>['1', '2', '3', '5', '8', '13', '21', '34', '?'];
+const cardList = <String>[
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12',
+  '?',
+];
