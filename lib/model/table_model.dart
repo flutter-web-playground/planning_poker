@@ -3,6 +3,7 @@ import 'package:planning_poker/model/user_model.dart';
 class TableModel {
   String id = '';
   bool showCards = false;
+  bool showCardsTimer = false;
   List<UserModel> bottomTableList = [];
   List<UserModel> topTableList = [];
   List<UserModel> leftTableList = [];

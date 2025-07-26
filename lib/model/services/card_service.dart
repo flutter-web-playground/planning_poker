@@ -45,6 +45,25 @@ class CardService {
     return getTable(tableId: tableId, side: 'right');
   }
 
+  Stream<List<UserModel>> getAllSideTable({required String tableId}) {
+    return database.ref('room/$tableId').onValue.map((e) {
+      List<UserModel> userModelList = [];
+      for (var side in e.snapshot.children) {
+        for (var user in (side.children)) {
+          final userData = json.decode(json.encode(user.value));
+          UserModel userModel = UserModel(
+            id: user.key.toString(),
+            name: userData['name'].toString(),
+            specter: userData['specter'] as bool,
+            card: CardModel(value: userData['card'].toString()),
+          );
+          userModelList.add(userModel);
+        }
+      }
+      return userModelList;
+    });
+  }
+
   Stream<bool> getShowCards({required String tableId}) {
     return database.ref('room/$tableId/showcards').onValue.map((e) {
       final result = bool.tryParse(e.snapshot.value.toString()) ?? false;

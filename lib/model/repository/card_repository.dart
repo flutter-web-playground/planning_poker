@@ -21,6 +21,10 @@ class CardRepository {
     yield* _service.getRightTable(tableId: tableId);
   }
 
+  Stream<List<UserModel>> getAllSideTable({required String tableId}) async* {
+    yield* _service.getAllSideTable(tableId: tableId);
+  }
+
   Stream<bool> getShowCards({required String tableId}) async* {
     yield* _service.getShowCards(tableId: tableId);
   }

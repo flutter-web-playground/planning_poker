@@ -14,6 +14,20 @@ class ShowCardsViewModel extends ChangeNotifier {
       tableModel.showCards = event;
       notifyListeners();
     });
+
+    repository.getAllSideTable(tableId: tableModel.id).listen((event) {
+      for (var element in event.toList()) {
+        if ((element.card.value.isNotEmpty || element.specter) && (!tableModel.showCards)) {
+          tableModel.showCardsTimer = true;
+        } else {
+          tableModel.showCardsTimer = false;
+          break;
+        }
+      }
+      if (tableModel.showCardsTimer) {
+        notifyListeners();
+      }
+    });
   }
 
   void flipCards() {
