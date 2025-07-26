@@ -25,6 +25,32 @@ class SelectCardWidget extends StatefulWidget {
 class _SelectCardWidgetState extends State<SelectCardWidget> {
   int selected = -1;
 
+  void _lintenable() {
+    if (widget.showCardsViewModel.showCards.isCompleted) {
+      if ((!widget.showCardsViewModel.showCards.result) &&
+          (widget.user.side.isNotEmpty) &&
+          (widget.user.name.isNotEmpty)) {
+        setState(() {
+          selected = -1;
+          widget.user.card.value = '';
+          widget.cardRepository.updateUserCard(user: widget.user);
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    widget.showCardsViewModel.showCards.addListener(_lintenable);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.showCardsViewModel.showCards.removeListener(_lintenable);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
