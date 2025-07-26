@@ -1,4 +1,6 @@
 import 'package:flutter/widgets.dart';
+import 'package:planning_poker/core/command.dart';
+import 'package:planning_poker/core/result.dart';
 import 'package:planning_poker/model/repository/card_repository.dart';
 import 'package:planning_poker/model/table_model.dart';
 
@@ -6,12 +8,14 @@ class ShowCardsViewModel extends ChangeNotifier {
   final CardRepository repository;
   final TableModel tableModel;
 
-  ShowCardsViewModel({
-    required this.tableModel,
-    required this.repository,
-  }) {
+  late final Command0 showCards;
+
+  ShowCardsViewModel({required this.tableModel, required this.repository}) {
+    showCards = Command0(_showCards)..execute();
+
     repository.getShowCards(tableId: tableModel.id).listen((event) {
       tableModel.showCards = event;
+      showCards.execute();
       notifyListeners();
     });
 
@@ -32,5 +36,9 @@ class ShowCardsViewModel extends ChangeNotifier {
 
   void flipCards() {
     repository.flipCards(table: tableModel);
+  }
+
+  Future<Result<bool>> _showCards() async {
+    return Result.ok(tableModel.showCards);
   }
 }
